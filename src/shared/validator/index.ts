@@ -1,15 +1,15 @@
-import { NextFunction, CustomRequest, Response } from "express";
-import { BadCustomRequestError } from "../errors";
+import { NextFunction, Request, Response } from "express";
+import { BadRequestError } from "../errors";
 import Joi, { ValidationError } from "joi";
 
 export default function genValidator(schema: Joi.Schema) {
-  return async (req: CustomRequest, res: Response, next: NextFunction) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
     try {
       await schema.validateAsync(req.body);
       next();
     } catch (error) {
       if (error instanceof ValidationError)
-        throw new BadCustomRequestError(error.details[0].message);
+        throw new BadRequestError(error.details[0].message);
       else next(error);
     }
   };

@@ -1,0 +1,37 @@
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "username":"jo",
+    "password":"12341",
+    "name":"doe1"
+}
+
+###
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+    "username":"jonedo1",
+    "password":"12341"
+}
+
+###
+GET http://localhost:3000/users/64c0ec96457ad87d67732c22
+
+###
+GET http://localhost:3000/users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRjOGYwNDM2MWNiOGU5NjdkZjc5YTI5In0sImlhdCI6MTY5MDk4MjU3NX0.xvRsGHpR31JC5iUjJbMJrRLuEpKiddF1-QCQiYNfT8w
+
+
+###
+PATCH  http://localhost:3000/users/64c0ec96457ad87d67732c22
+Content-Type: application/json
+
+{
+    "name":"jone",
+    "username":"doe"
+}
+
+###
+DELETE  http://localhost:3000/users/64c0ec96457ad87d67732c22

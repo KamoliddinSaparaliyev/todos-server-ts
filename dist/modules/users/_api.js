@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const _controllers_1 = require("./_controllers");
+const is_loggedin_js_1 = require("../../shared/auth/is-loggedin.js");
+const router = (0, express_1.Router)();
+router.post("/users", _controllers_1.postUser);
+router.post("/users/login", _controllers_1.loginUser);
+router.get("/users", is_loggedin_js_1.isLoggedIn, _controllers_1.getUsers);
+router.get("/users/:id", is_loggedin_js_1.isLoggedIn, _controllers_1.getUser);
+router.patch("/users/:id", is_loggedin_js_1.isLoggedIn, _controllers_1.patchUser);
+router.delete("/users/:id", is_loggedin_js_1.isLoggedIn, _controllers_1.deleteUser);
+exports.default = router;

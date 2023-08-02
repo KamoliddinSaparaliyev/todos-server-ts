@@ -3,28 +3,23 @@ import jwt from "jsonwebtoken";
 import { UnauthorizedError } from "../errors";
 import config from "../config";
 
-export interface CustomRequest extends Request {
+interface UserPayload {
   user: {
     id: string;
   };
 }
 
 export const isLoggedIn = async (
-  req: CustomRequest,
+  req: Request,
   res: Response,
   next: NextFunction
-): Promise<void> => { 
+) => {
   try {
     const token = req.headers.authorization;
-
-    if (!token) {
-      throw new UnauthorizedError("Tizimga kiring");
-    }
-
-    // Verify the JWT token and extract the payload
-    const payload = await jwt.verify(token, config.jwt.secret);
-    // req: = {}; // Assuming the payload has a 'user' property
-
+    if (!token) throw new UnauthorizedError("Tizimga kiring");
+    const payload = (await jwt.verify(token, config.jwt.secret)) as UserPayload;
+    console.log(payload);
+    req.user = payload.user;
     next();
   } catch (error) {
     next(error);

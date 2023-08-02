@@ -1,6 +1,6 @@
-import express, { CustomRequest, Response } from "express";
+import express, { Request, Response } from "express";
 import usersRoute from "./modules/users/_api";
-import { errorMiddlewareFunc } from "./shared/errors";
+import { errorMiddlewareFunc } from "./shared/errors/handle";
 import dbConnect from "./db";
 
 const app = express();
@@ -12,7 +12,7 @@ app.use(errorMiddlewareFunc);
 
 app.use(usersRoute);
 
-app.get("/", (req: CustomRequest, res: Response) => {
+app.get("/", (req: Request, res: Response) => {
   res.send("Hello TypeScript");
 });
 
